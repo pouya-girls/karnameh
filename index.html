@@ -1,0 +1,67 @@
+<html>
+<head>
+    <title>Karnameh</title>
+</head>
+<body>
+
+<div>
+    <div>
+        Name
+        <input id="name">
+    </div>
+    <div>
+        Mark
+        <input id="mark">
+    </div>
+    <button id="add">Add</button>
+</div>
+<table id="karnameh"></table>
+<script>
+    var karnameh = []
+    function onBtnAddClicked() {
+        const txtName = document.getElementById('name')
+        const txtMark = document.getElementById('mark')
+
+        karnameh.push({name: txtName.value, mark: Number(txtMark.value)})
+
+        fillTable()
+
+        txtName.value = ''
+        txtMark.value = ''
+    }
+
+    function fillTable() {
+        const tblKarnameh = document.getElementById('karnameh')
+        tblKarnameh.innerHTML = '<tr>' +
+            '<th>Name</th>' +
+            '<th>Mark</th>' +
+            '</tr>'
+        karnameh.map( function (dars) {
+            tblKarnameh.innerHTML += '<tr>' +
+                '<td>' + dars.name + '</td>' +
+                '<td>' + dars.mark + '</td>' +
+                '</tr>'
+        })
+
+        tblKarnameh.innerHTML += '<tr>' +
+            '<td>Average</td>' +
+            '<td>' + calculateAverage() + '</td>' +
+            '</tr>'
+    }
+
+    function calculateAverage() {
+        var sum = 0;
+        karnameh.map(function (dars) {
+            sum += dars.mark
+        })
+
+        console.log(sum)
+
+        return sum / karnameh.length
+    }
+
+    const btnAdd = document.getElementById('add')
+    btnAdd.addEventListener('click', onBtnAddClicked)
+</script>
+</body>
+</html>
